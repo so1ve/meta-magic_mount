@@ -42,10 +42,9 @@ postprocessors = [
 # render_always = true
 # output file path
 # output = "test.md"
-
 footer = """
 {% if previous %}\
-**Full Changelog**: {{ self::remote_url() }}/compare/{{ previous.version }}...{{ version }}\
+**Full Changelog**: {{ remote.github }}/compare/{{ previous.version }}...{{ version }}\
 {% endif %}
 """
 
