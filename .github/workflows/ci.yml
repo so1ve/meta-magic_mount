@@ -6,6 +6,9 @@ on:
       - 'src/**'
       - 'Cargo.*'
       - 'module/**'
+      - 'webui/**'
+      - 'build.rs'
+      - '.github/workflows/ci.yml'
   pull_request:
     branches: ["master"]
     paths:
@@ -13,6 +16,8 @@ on:
       - 'Cargo.*'
       - 'module/**'
       - 'webui/**'
+      - 'build.rs'
+      - '.github/workflows/ci.yml'
 env:
   CARGO_TERM_COLOR: always
 jobs:
@@ -37,7 +42,7 @@ jobs:
       - name: Setup Rust toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: nightly
+          toolchain: stable
           targets: aarch64-linux-android
           components: rust-src
       - uses: Swatinem/rust-cache@v2

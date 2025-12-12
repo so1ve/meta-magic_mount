@@ -29,7 +29,7 @@ jobs:
       - name: Setup Rust toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: nightly
+          toolchain: stable
           targets: aarch64-linux-android
           components: rust-src
       - uses: Swatinem/rust-cache@v2
