@@ -29,13 +29,11 @@ jobs:
       - name: Setup Rust toolchain
         uses: dtolnay/rust-toolchain@stable
         with:
-          toolchain: stable
+          toolchain: nightly
           targets: aarch64-linux-android
           components: rust-src
       - uses: Swatinem/rust-cache@v2
         with:
-          prefix-key: ""
-          add-rust-environment-hash-key: "false"
           shared-key: "ndk-rust"
       - name: Install build dependencies
         run: |
