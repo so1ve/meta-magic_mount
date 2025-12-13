@@ -1,4 +1,11 @@
-use std::{ffi::CString, fs::read_dir, io, os::fd::RawFd, path::Path, sync::OnceLock};
+use std::{
+    ffi::CString,
+    fs::{self, read_dir},
+    io,
+    os::fd::RawFd,
+    path::Path,
+    sync::OnceLock,
+};
 
 use anyhow::Result;
 use rustix::path::Arg;
@@ -42,6 +49,7 @@ where
 
         if let Some(name) = path.file_name()
             && name.to_string_lossy().to_string().contains("zygisksu")
+            && fs::read_to_string("/data/adb/zygisksu/denylist_enforce")?.trim() == "0"
         {
             log::warn!("zn was detected, and try_umount was cancelled.");
             return Ok(());
