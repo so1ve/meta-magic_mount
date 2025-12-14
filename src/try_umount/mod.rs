@@ -1,4 +1,3 @@
-mod hymofs;
 mod kernel;
 
 use std::{
@@ -37,13 +36,6 @@ where
             && fs::read_to_string("/data/adb/zygisksu/denylist_enforce")?.trim() != "0"
         {
             log::warn!("zn was detected, and try_umount was cancelled.");
-            return Ok(());
-        }
-    }
-
-    for i in hymofs::HYMO_DEV {
-        if fs::exists(i)? {
-            hymofs::send_hide_hymofs(target.as_ref())?;
             return Ok(());
         }
     }
