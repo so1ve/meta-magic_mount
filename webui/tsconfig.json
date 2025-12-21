@@ -3,17 +3,23 @@
     "target": "ESNext",
     "useDefineForClassFields": true,
     "module": "ESNext",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
+    "types": ["vite/client", "svelte"],
     "allowJs": true,
     "checkJs": true,
-    "isolatedModules": true,
-    "moduleResolution": "bundler",
-    "types": ["vite/client", "svelte"],
     "strict": true,
     "noImplicitAny": false,
-    "skipLibCheck": true,
     "noEmit": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]
+  "include": [
+    "src/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.svelte",
+    "vite.config.ts"
+  ]
 }
