@@ -57,7 +57,7 @@ jobs:
       - name: Setup Webui deps
         run: |
           cd webui/
-          npm install
+          pnpm install --frozen-lockfile
       - name: Build
         run: |
           export ANDROID_NDK_HOME=$(realpath ~/ndk_temp)
