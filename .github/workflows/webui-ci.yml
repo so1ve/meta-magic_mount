@@ -17,4 +17,5 @@ jobs:
     uses: so1ve/workflows/.github/workflows/conventional-ci.yml@v1
     with:
       skip-test: true
+
       working-directory: webui
