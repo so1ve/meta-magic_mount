@@ -49,8 +49,8 @@ export default function StatusTab() {
   return (
     <>
       <md-dialog
-        open={showRebootConfirm()}
-        onClose={() => setShowRebootConfirm(false)}
+        prop:open={showRebootConfirm()}
+        on:close={() => setShowRebootConfirm(false)}
         style={{
           "--md-dialog-scrim-color": "transparent",
           "--md-sys-color-scrim": "transparent",

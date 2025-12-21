@@ -110,7 +110,7 @@ export default function ConfigTab() {
                 }
                 class="full-width-field"
               >
-                <md-icon prop:slot="leading-icon">
+                <md-icon slot="leading-icon">
                   <svg viewBox="0 0 24 24">
                     <path d={ICONS.modules} />
                   </svg>
@@ -139,9 +139,9 @@ export default function ConfigTab() {
 
             <div class="input-stack">
               <md-outlined-text-field
-                label={store.L.config?.mountSource}
-                value={store.config.mountsource}
-                onInput={(e: Event) =>
+                prop:label={store.L.config?.mountSource}
+                prop:value={store.config.mountsource}
+                on:input={(e: Event) =>
                   handleInput(
                     "mountsource",
                     (e.target as HTMLInputElement).value,
@@ -271,7 +271,7 @@ export default function ConfigTab() {
           on:click={save}
           prop:disabled={store.saving.config ?? !isDirty()}
         >
-          <md-icon prop:slot="icon">
+          <md-icon slot="icon">
             <svg viewBox="0 0 24 24">
               <path d={ICONS.save} />
             </svg>

@@ -24,7 +24,7 @@ export default function LogsTab() {
   const [filterLevel, setFilterLevel] = createSignal<
     "all" | "info" | "warn" | "error"
   >("all");
-  let logContainer: HTMLElement | undefined;
+  let logContainer: HTMLDivElement | undefined;
   const [autoRefresh, setAutoRefresh] = createSignal(false);
   let refreshInterval: number | undefined;
   const [userHasScrolledUp, setUserHasScrolledUp] = createSignal(false);
@@ -135,9 +135,9 @@ export default function LogsTab() {
             <div class="log-auto-group">
               <md-checkbox
                 id="auto-refresh"
-                checked={autoRefresh()}
-                onChange={toggleAutoRefresh}
-                touch-target="wrapper"
+                prop:checked={autoRefresh()}
+                on:change={toggleAutoRefresh}
+                prop:touch-target="wrapper"
               />
               <label for="auto-refresh" class="log-auto-label">
                 Auto
