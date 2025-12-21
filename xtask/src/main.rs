@@ -181,7 +181,6 @@ fn build_webui() -> Result<()> {
         command
     };
 
-    pnpm().args(["install", "--frozen-lockfile"]).spawn()?.wait()?;
     pnpm().args(["run", "build"]).spawn()?.wait()?;
 
     Ok(())
