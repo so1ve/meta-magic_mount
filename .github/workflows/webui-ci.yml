@@ -12,6 +12,10 @@ on:
       - "webui/**"
       - ".github/workflows/webui-ci.yml"
 
+defaults:
+  run:
+    working-directory: webui
+
 jobs:
   conventional-ci:
     uses: so1ve/workflows/.github/workflows/conventional-ci.yml@v1
