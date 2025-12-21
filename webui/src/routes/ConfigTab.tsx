@@ -17,7 +17,7 @@ import "@material/web/ripple/ripple.js";
 export default function ConfigTab() {
   const [initialConfigStr, setInitialConfigStr] = createSignal("");
 
-  const isValidPath = (p: string) => !p ?? (p.startsWith("/") && p.length > 1);
+  const isValidPath = (p: string) => !p || (p.startsWith("/") && p.length > 1);
   const invalidModuleDir = createMemo(
     () => !isValidPath(store.config.moduledir),
   );
@@ -34,7 +34,7 @@ export default function ConfigTab() {
     if (
       !store.loading.config &&
       store.config &&
-      (!initialConfigStr() ??
+      (!initialConfigStr() ||
         initialConfigStr() === JSON.stringify(store.config))
     ) {
       setInitialConfigStr(JSON.stringify(store.config));
