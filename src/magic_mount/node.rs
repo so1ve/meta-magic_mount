@@ -110,8 +110,7 @@ impl Node {
 
     pub fn new_module<S>(name: &S, entry: &DirEntry) -> Option<Self>
     where
-        S: AsRef<str> + Into<String>,
-        std::string::String: for<'a> From<&'a S>,
+        S: ToString,
     {
         if let Ok(metadata) = entry.metadata() {
             let path = entry.path();
@@ -123,7 +122,7 @@ impl Node {
             if let Some(file_type) = file_type {
                 let replace = file_type == NodeFileType::Directory && Self::dir_is_replace(&path);
                 return Some(Self {
-                    name: name.into(),
+                    name: name.to_string(),
                     file_type,
                     children: HashMap::default(),
                     module_path: Some(path),
