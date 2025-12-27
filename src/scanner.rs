@@ -7,7 +7,7 @@ use crate::{
     utils::validate_module_id,
 };
 
-const PERFIX: &[&str] = &["system", "odm"];
+const PREFIX: &[&str] = &["system", "odm"];
 
 #[derive(Debug, Serialize)]
 pub struct ModuleInfo {
@@ -54,9 +54,15 @@ where
                 continue;
             }
 
-            if PERFIX.iter().all(|p| !path.join(p).is_dir())
-                || extra.iter().all(|p| !path.join(p).is_dir())
-            {
+            let extra = if extra.is_empty() { None } else { Some(extra) };
+
+            let no_prefix_dirs = PREFIX.iter().all(|p| !path.join(p).is_dir());
+
+            let no_extra_dirs = extra
+                .as_ref()
+                .is_none_or(|e| e.iter().all(|p| !path.join(p).is_dir()));
+
+            if no_prefix_dirs && no_extra_dirs {
                 continue;
             }
 
