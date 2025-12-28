@@ -114,14 +114,7 @@ fn build() -> Result<()> {
     build_webui()?;
 
     let mut cargo = cargo_ndk();
-    let args = vec![
-        "build",
-        "-Z",
-        "build-std",
-        "-Z",
-        "trim-paths",
-        "-r",
-    ];
+    let args = vec!["build", "-Z", "build-std", "-Z", "trim-paths", "-r"];
 
     cargo.args(args);
 
