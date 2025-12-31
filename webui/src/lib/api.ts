@@ -152,7 +152,7 @@ function parseKvConfig(text: string): MagicConfig {
 function serializeKvConfig(cfg: MagicConfig): string {
   const q = (s: string) => `"${s}"`;
   const lines = ["# Magic Mount Configuration File", ""];
-  // eslint-disable-next-line unicorn/no-immediate-mutation
+
   lines.push(`moduledir = ${q(cfg.moduledir)}`);
   if (cfg.tempdir) {
     lines.push(`tempdir = ${q(cfg.tempdir)}`);
