@@ -12,13 +12,23 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v6
-      
+
       - name: Install addlicense
         run: go install github.com/google/addlicense@latest
 
       - name: Run addlicense
         run: |
           ~/go/bin/addlicense -v -c "Magic Mount-rs Authors" -s -l GPL-3.0-or-later -y 2025 src xtask webui tools
+
+      - name: Setup JS
+        uses: so1ve/workflows/setup-js@v1
+        with:
+          working-directory: webui
+
+      - name: Format Webui
+        run: |
+          cd webui
+          pnpm lint:fix
 
       - name: Check for changes
         id: git-check
