@@ -157,13 +157,12 @@ fn build() -> Result<()> {
         &file::CopyOptions::new().overwrite(true),
     )?;
 
-    if let Ok(key) = env::var("PRIVATE") {
+    if let Ok(key) = env::var("PRIVATE")
+        && !key.is_empty()
+    {
         let key_bytes = general_purpose::STANDARD.decode(key)?;
 
-        let key: [u8; 32] = key_bytes
-            .try_into()
-            .map_err(|_| "Invalid key length: must be 32 bytes")
-            .unwrap();
+        let key: [u8; 32] = key_bytes.try_into().unwrap();
         sgin::Signer::new("./output/.temp", &key)?.sign_files(&[
             "module.prop",
             "metainstall.sh",
