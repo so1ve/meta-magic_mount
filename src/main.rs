@@ -23,13 +23,7 @@ use crate::config::Config;
 #[global_allocator]
 static GLOBAL: MiMalloc = MiMalloc;
 
-fn init_logger(verbose: bool) {
-    let level = if verbose {
-        log::LevelFilter::Trace
-    } else {
-        log::LevelFilter::Debug
-    };
-
+fn init_logger() {
     #[cfg(not(target_os = "android"))]
     {
         use std::io::Write;
@@ -45,19 +39,17 @@ fn init_logger(verbose: bool) {
                 record.args()
             )
         });
-        builder.filter_level(level).init();
+        builder.filter_level(log::LevelFilter::Debug).init();
     }
 
     #[cfg(target_os = "android")]
     {
         android_logger::init_once(
             android_logger::Config::default()
-                .with_max_level(level)
+                .with_max_level(log::LevelFilter::Debug)
                 .with_tag("MagicMount"),
         );
     }
-
-    log::info!("log level: {}", level.as_str());
 }
 
 fn main() -> Result<()> {
@@ -90,7 +82,7 @@ fn main() -> Result<()> {
         }
     }
 
-    init_logger(config.verbose);
+    init_logger();
 
     if !utils::ksucalls::check_ksu() {
         log::error!("only support KernelSU!!");

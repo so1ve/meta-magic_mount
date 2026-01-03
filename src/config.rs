@@ -14,7 +14,6 @@ pub struct Config {
     pub moduledir: PathBuf,
     #[serde(default = "default_mountsource")]
     pub mountsource: String,
-    pub verbose: bool,
     pub partitions: Vec<String>,
     pub tmpfsdir: Option<String>,
     #[cfg(any(target_os = "linux", target_os = "android"))]
@@ -33,9 +32,6 @@ impl fmt::Display for Config {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         writeln!(f, "module real path: {}", self.moduledir.display())?;
         writeln!(f, "mount source: {}", self.mountsource)?;
-        if self.verbose {
-            writeln!(f, "u enable debug mode!!")?;
-        }
         if self.partitions.is_empty() {
             write!(f, "no extra partitions")
         } else {
