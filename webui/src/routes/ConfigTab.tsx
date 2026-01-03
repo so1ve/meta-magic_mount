@@ -94,9 +94,7 @@ export default function ConfigTab() {
               </div>
               <div class="card-text">
                 <span class="card-title">{store.L.config.moduleDir}</span>
-                <span class="card-desc">
-                  {store.L.config.moduleDirDesc}
-                </span>
+                <span class="card-desc">{store.L.config.moduleDirDesc}</span>
               </div>
             </div>
 
@@ -109,9 +107,7 @@ export default function ConfigTab() {
                 }
                 prop:error={invalidModuleDir()}
                 supporting-text={
-                  invalidModuleDir()
-                    ? (store.L.config.invalidPath)
-                    : ""
+                  invalidModuleDir() ? store.L.config.invalidPath : ""
                 }
                 class="full-width-field"
               >
@@ -135,9 +131,7 @@ export default function ConfigTab() {
               </div>
               <div class="card-text">
                 <span class="card-title">{store.L.config.mountSource}</span>
-                <span class="card-desc">
-                  {store.L.config.mountSourceDesc}
-                </span>
+                <span class="card-desc">{store.L.config.mountSourceDesc}</span>
               </div>
             </div>
 
@@ -175,9 +169,7 @@ export default function ConfigTab() {
               </div>
               <div class="card-text">
                 <span class="card-title">{store.L.config.partitions}</span>
-                <span class="card-desc">
-                  {store.L.config.partitionsDesc}
-                </span>
+                <span class="card-desc">{store.L.config.partitionsDesc}</span>
               </div>
             </div>
             <div class="p-input">
@@ -207,9 +199,7 @@ export default function ConfigTab() {
                 </div>
               </div>
               <div class="tile-bottom">
-                <span class="tile-label">
-                  {store.L.config.umountLabel}
-                </span>
+                <span class="tile-label">{store.L.config.umountLabel}</span>
               </div>
             </button>
 
@@ -228,9 +218,7 @@ export default function ConfigTab() {
                 </div>
               </div>
               <div class="tile-bottom">
-                <span class="tile-label">
-                  {store.L.config.fixBottomNav}
-                </span>
+                <span class="tile-label">{store.L.config.fixBottomNav}</span>
               </div>
             </button>
           </div>
