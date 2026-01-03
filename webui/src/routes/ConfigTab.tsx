@@ -49,7 +49,7 @@ export default function ConfigTab() {
 
   function save() {
     if (invalidModuleDir()) {
-      store.showToast(store.L.config?.invalidPath ?? "Invalid Path", "error");
+      store.showToast(store.L.config.invalidPath, "error");
 
       return;
     }
@@ -93,17 +93,16 @@ export default function ConfigTab() {
                 </md-icon>
               </div>
               <div class="card-text">
-                <span class="card-title">{store.L.config?.moduleDir}</span>
+                <span class="card-title">{store.L.config.moduleDir}</span>
                 <span class="card-desc">
-                  {store.L.config?.moduleDirDesc ??
-                    "Set the directory where modules are stored"}
+                  {store.L.config.moduleDirDesc}
                 </span>
               </div>
             </div>
 
             <div class="input-stack">
               <md-outlined-text-field
-                prop:label={store.L.config?.moduleDir}
+                prop:label={store.L.config.moduleDir}
                 prop:value={store.config.moduledir}
                 on:input={(e: Event) =>
                   handleInput("moduledir", (e.target as HTMLInputElement).value)
@@ -111,7 +110,7 @@ export default function ConfigTab() {
                 prop:error={invalidModuleDir()}
                 supporting-text={
                   invalidModuleDir()
-                    ? (store.L.config?.invalidPath ?? "Invalid Path")
+                    ? (store.L.config.invalidPath)
                     : ""
                 }
                 class="full-width-field"
@@ -135,17 +134,16 @@ export default function ConfigTab() {
                 </md-icon>
               </div>
               <div class="card-text">
-                <span class="card-title">{store.L.config?.mountSource}</span>
+                <span class="card-title">{store.L.config.mountSource}</span>
                 <span class="card-desc">
-                  {store.L.config?.mountSourceDesc ??
-                    "Global mount source namespace (e.g. KSU)"}
+                  {store.L.config.mountSourceDesc}
                 </span>
               </div>
             </div>
 
             <div class="input-stack">
               <md-outlined-text-field
-                prop:label={store.L.config?.mountSource}
+                prop:label={store.L.config.mountSource}
                 prop:value={store.config.mountsource}
                 on:input={(e: Event) =>
                   handleInput(
@@ -176,9 +174,9 @@ export default function ConfigTab() {
                 </md-icon>
               </div>
               <div class="card-text">
-                <span class="card-title">{store.L.config?.partitions}</span>
+                <span class="card-title">{store.L.config.partitions}</span>
                 <span class="card-desc">
-                  {store.L.config?.partitionsDesc ?? "Add partitions to mount"}
+                  {store.L.config.partitionsDesc}
                 </span>
               </div>
             </div>
@@ -210,7 +208,7 @@ export default function ConfigTab() {
               </div>
               <div class="tile-bottom">
                 <span class="tile-label">
-                  {store.L.config?.umountLabel ?? "Disable Umount"}
+                  {store.L.config.umountLabel}
                 </span>
               </div>
             </button>
@@ -231,7 +229,7 @@ export default function ConfigTab() {
               </div>
               <div class="tile-bottom">
                 <span class="tile-label">
-                  {store.L.config?.fixBottomNav ?? "Fix Bottom Nav"}
+                  {store.L.config.fixBottomNav}
                 </span>
               </div>
             </button>
@@ -243,7 +241,7 @@ export default function ConfigTab() {
         <md-filled-tonal-icon-button
           on:click={reload}
           prop:disabled={store.loading.config}
-          prop:title={store.L.config?.reload}
+          prop:title={store.L.config.reload}
         >
           <md-icon>
             <svg viewBox="0 0 24 24">
@@ -263,7 +261,7 @@ export default function ConfigTab() {
               <path d={ICONS.save} />
             </svg>
           </md-icon>
-          {store.saving.config ? store.L.common?.saving : store.L.config?.save}
+          {store.saving.config ? store.L.common.saving : store.L.config.save}
         </md-filled-button>
       </BottomActions>
     </>

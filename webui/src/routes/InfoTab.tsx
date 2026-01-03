@@ -132,7 +132,7 @@ export default function InfoTab() {
         <div class="app-logo">
           <MagicLogo />
         </div>
-        <span class="app-name">{store.L.common?.appName}</span>
+        <span class="app-name">{store.L.common.appName}</span>
         <span class="app-version">{version()}</span>
       </div>
 
@@ -148,12 +148,12 @@ export default function InfoTab() {
               <path d={ICONS.github} />
             </svg>
           </md-icon>
-          {store.L.info?.projectLink}
+          {store.L.info.projectLink}
         </md-filled-tonal-button>
       </div>
 
       <div class="contributors-section">
-        <div class="section-title">{store.L.info?.contributors}</div>
+        <div class="section-title">{store.L.info.contributors}</div>
         <div class="list-wrapper">
           <Show
             when={!loading()}
@@ -174,7 +174,7 @@ export default function InfoTab() {
             <Show
               when={!error()}
               fallback={
-                <div class="error-message">{store.L.info?.loadFail}</div>
+                <div class="error-message">{store.L.info.loadFail}</div>
               }
             >
               <md-list class="contributors-list">
@@ -195,7 +195,7 @@ export default function InfoTab() {
                       />
                       <div slot="headline">{user.name ?? user.login}</div>
                       <div slot="supporting-text">
-                        {user.bio ?? store.L.info?.noBio}
+                        {user.bio ?? store.L.info.noBio}
                       </div>
                     </md-list-item>
                   )}

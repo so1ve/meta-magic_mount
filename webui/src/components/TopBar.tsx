@@ -19,17 +19,17 @@ export default function TopBar() {
   function toggleTheme() {
     let nextTheme;
     let toastMsg;
-    const common = store.L?.common;
+    const common = store.L.common;
 
     if (store.theme === "auto") {
       nextTheme = "light";
-      toastMsg = common?.themeLight ?? "Light Mode";
+      toastMsg = common.themeLight;
     } else if (store.theme === "light") {
       nextTheme = "dark";
-      toastMsg = common?.themeDark ?? "Dark Mode";
+      toastMsg = common.themeDark;
     } else {
       nextTheme = "auto";
-      toastMsg = common?.themeAuto ?? "Auto Mode";
+      toastMsg = common.themeAuto;
     }
 
     store.setTheme(nextTheme);
@@ -72,12 +72,12 @@ export default function TopBar() {
   return (
     <header class="top-bar">
       <div class="top-bar-content">
-        <h1 class="screen-title">{store.L?.common?.appName}</h1>
+        <h1 class="screen-title">{store.L.common.appName}</h1>
         <div class="top-actions">
           <button
             class="btn-icon"
             onClick={toggleTheme}
-            title={store.L?.common?.theme}
+            title={store.L.common.theme}
           >
             <svg viewBox="0 0 24 24">
               <path d={getThemeIcon()} fill="currentColor" />
@@ -88,7 +88,7 @@ export default function TopBar() {
             class="btn-icon"
             ref={langButtonRef}
             onClick={() => setShowLangMenu(!showLangMenu())}
-            title={store.L?.common?.language}
+            title={store.L.common.language}
           >
             <svg viewBox="0 0 24 24">
               <path d={ICONS.translate} fill="currentColor" />
@@ -97,7 +97,7 @@ export default function TopBar() {
 
           <Show when={showLangMenu()}>
             <div class="menu-dropdown" ref={menuRef}>
-              <For each={store.availableLanguages ?? []}>
+              <For each={store.availableLanguages}>
                 {(l) => (
                   <button class="menu-item" onClick={() => setLang(l.code)}>
                     {l.name}

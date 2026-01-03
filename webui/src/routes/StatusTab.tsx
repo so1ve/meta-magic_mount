@@ -32,10 +32,7 @@ export default function StatusTab() {
       `Kernel: ${store.device.kernel}\n` +
       `SELinux: ${store.device.selinux}`;
     navigator.clipboard.writeText(info);
-    store.showToast(
-      store.L.status?.copySuccess ?? "Copied to clipboard",
-      "success",
-    );
+    store.showToast(store.L.status.copySuccess, "success");
   }
 
   const [showRebootConfirm, setShowRebootConfirm] = createSignal(false);
@@ -62,19 +59,14 @@ export default function StatusTab() {
           "--md-sys-color-scrim": "transparent",
         }}
       >
-        <div slot="headline">
-          {store.L.common?.rebootTitle ?? "Reboot System?"}
-        </div>
-        <div slot="content">
-          {store.L.common?.rebootConfirm ??
-            "Are you sure you want to reboot the device?"}
-        </div>
+        <div slot="headline">{store.L.common.rebootTitle}</div>
+        <div slot="content">{store.L.common.rebootConfirm}</div>
         <div slot="actions">
           <md-text-button on:click={() => setShowRebootConfirm(false)}>
-            {store.L.common?.cancel ?? "Cancel"}
+            {store.L.common.cancel}
           </md-text-button>
           <md-text-button on:click={handleReboot}>
-            {store.L.common?.reboot ?? "Reboot"}
+            {store.L.common.reboot}
           </md-text-button>
         </div>
       </md-dialog>
@@ -96,9 +88,7 @@ export default function StatusTab() {
                   </svg>
                 </md-icon>
               </div>
-              <span class="hero-title">
-                {store.L.status?.deviceTitle ?? "Device"}
-              </span>
+              <span class="hero-title">{store.L.status.deviceTitle}</span>
             </div>
             <div class="hero-main-info">
               <Show
@@ -120,7 +110,7 @@ export default function StatusTab() {
           <div class="hero-actions">
             <md-icon-button
               on:click={copyDebugInfo}
-              prop:title={store.L.status?.copy ?? "Copy info"}
+              prop:title={store.L.status.copy}
             >
               <md-icon>
                 <svg viewBox="0 0 24 24">
@@ -143,7 +133,7 @@ export default function StatusTab() {
               }
             >
               <div class="stat-value">{mountedCount()}</div>
-              <div class="stat-label">{store.L.status?.moduleActive}</div>
+              <div class="stat-label">{store.L.status.moduleActive}</div>
             </Show>
           </div>
 
@@ -158,20 +148,16 @@ export default function StatusTab() {
               }
             >
               <div class="stat-value">{store.config?.mountsource ?? "-"}</div>
-              <div class="stat-label">{store.L.config?.mountSource}</div>
+              <div class="stat-label">{store.L.config.mountSource}</div>
             </Show>
           </div>
         </div>
 
         <div class="details-card">
-          <div class="card-title">
-            {store.L.status?.sysInfoTitle ?? "System Details"}
-          </div>
+          <div class="card-title">{store.L.status.sysInfoTitle}</div>
           <div class="info-list">
             <div class="info-item">
-              <span class="info-label">
-                {store.L.status?.androidLabel ?? "Android"}
-              </span>
+              <span class="info-label">{store.L.status.androidLabel}</span>
               <Show
                 when={!store.loading.status}
                 fallback={<Skeleton width="60px" height="16px" />}
@@ -181,9 +167,7 @@ export default function StatusTab() {
             </div>
 
             <div class="info-item">
-              <span class="info-label">
-                {store.L.status?.selinuxLabel ?? "SELinux"}
-              </span>
+              <span class="info-label">{store.L.status.selinuxLabel}</span>
               <Show
                 when={!store.loading.status}
                 fallback={<Skeleton width="80px" height="16px" />}
@@ -195,9 +179,7 @@ export default function StatusTab() {
             </div>
 
             <div class="info-item full-width">
-              <span class="info-label">
-                {store.L.status?.kernelLabel ?? "Kernel"}
-              </span>
+              <span class="info-label">{store.L.status.kernelLabel}</span>
               <Show
                 when={!store.loading.status}
                 fallback={<Skeleton width="100%" height="16px" />}
@@ -214,7 +196,7 @@ export default function StatusTab() {
         <md-filled-tonal-icon-button
           class="reboot-btn"
           on:click={() => setShowRebootConfirm(true)}
-          prop:title={store.L.common?.reboot ?? "Reboot Device"}
+          prop:title={store.L.common.reboot}
         >
           <md-icon>
             <svg viewBox="0 0 24 24">
@@ -226,7 +208,7 @@ export default function StatusTab() {
         <md-filled-tonal-icon-button
           on:click={() => store.loadStatus()}
           prop:disabled={store.loading.status}
-          prop:title={store.L.status?.refresh}
+          prop:title={store.L.status.refresh}
         >
           <md-icon>
             <svg viewBox="0 0 24 24">

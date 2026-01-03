@@ -15,10 +15,8 @@ import type {
 } from "./api";
 import { API } from "./api";
 import { DEFAULT_CONFIG, DEFAULT_SEED } from "./constants";
+import { availableLanguages, locales } from "./i18n";
 import { Monet } from "./theme";
-
-const localeModules = import.meta.glob("../locales/*.json", { eager: true });
-const modulesAny: Record<string, any> = localeModules;
 
 let darkModeQuery: MediaQueryList;
 
@@ -27,7 +25,6 @@ function createStore() {
   const [isSystemDark, setIsSystemDark] = createSignal(false);
   const [lang, setLangSignal] = createSignal("en");
   const [seed, setSeed] = createSignal(DEFAULT_SEED);
-  const [loadedLocale, setLoadedLocale] = createSignal<any>(null);
   const [toast, setToast] = createSignal({
     id: "init",
     text: "",
@@ -36,26 +33,6 @@ function createStore() {
   });
 
   const [fixBottomNav, setFixBottomNav] = createSignal(false);
-
-  const availableLanguages = Object.entries(modulesAny)
-    .map(([path, moduleData]) => {
-      const mod = moduleData;
-      const match = path.match(/\/([^/]+)\.json$/);
-      const code = match ? match[1] : "en";
-      const name = mod.default?.lang?.display ?? code.toUpperCase();
-
-      return { code, name };
-    })
-    .sort((a, b) => {
-      if (a.code === "en") {
-        return -1;
-      }
-      if (b.code === "en") {
-        return 1;
-      }
-
-      return a.name.localeCompare(b.name);
-    });
 
   const [config, setConfig] = createSignal<MagicConfig>(DEFAULT_CONFIG);
   const [modules, setModules] = createSignal<MagicModule[]>([]);
@@ -91,7 +68,7 @@ function createStore() {
   const [savingConfig, setSavingConfig] = createSignal(false);
   const [savingModules] = createSignal(false);
 
-  const L = createMemo(() => loadedLocale()?.default ?? {});
+  const L = createMemo(() => locales[lang()] ?? locales.en);
 
   const modeStats = createMemo(() => {
     const stats = { auto: 0, magic: 0, hymofs: 0 };
@@ -145,32 +122,14 @@ function createStore() {
     Monet.apply(seed(), isDark);
   }
 
-  async function loadLocale(code: string) {
-    const entry = Object.entries(modulesAny).find(([k]) =>
-      k.endsWith(`/${code}.json`),
-    );
-    if (entry) {
-      setLoadedLocale(entry[1]);
-    } else {
-      const enEntry = Object.entries(modulesAny).find(([k]) =>
-        k.endsWith("/en.json"),
-      );
-      if (enEntry) {
-        setLoadedLocale(enEntry[1]);
-      }
-    }
-  }
-
   function setLang(code: string) {
     setLangSignal(code);
     localStorage.setItem("mm-lang", code);
-    loadLocale(code);
   }
 
   async function init() {
     const savedLang = localStorage.getItem("mm-lang") ?? "en";
     setLangSignal(savedLang);
-    await loadLocale(savedLang);
 
     const savedTheme = localStorage.getItem("mm-theme");
     if (savedTheme) {
@@ -218,9 +177,9 @@ function createStore() {
     try {
       setConfig({ ...DEFAULT_CONFIG });
       await saveConfig();
-      showToast(L().common?.resetSuccess ?? "Config Reset", "success");
+      showToast(L().common.resetSuccess, "success");
     } catch {
-      showToast(L().common?.resetFailed ?? "Failed to reset", "error");
+      showToast(L().common.resetFailed, "error");
     }
     setLoadingConfig(false);
   }
@@ -229,7 +188,7 @@ function createStore() {
     setSavingConfig(true);
     try {
       await API.saveConfig(config());
-      showToast(L().common?.saveSuccess ?? "Saved", "success");
+      showToast(L().config.saveSuccess, "success");
     } catch {
       showToast("Failed to save config", "error");
     }
@@ -280,7 +239,7 @@ function createStore() {
     try {
       await API.reboot();
     } catch {
-      showToast(L().common?.rebootFailed ?? "Reboot failed", "error");
+      showToast(L().common.rebootFailed, "error");
     }
   }
 

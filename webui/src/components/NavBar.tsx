@@ -54,7 +54,7 @@ export default function NavBar(props: NavBarProps) {
                 <path d={tab.icon} />
               </svg>
             </div>
-            <span class="label">{store.L.tabs?.[tab.id] ?? tab.id}</span>
+            <span class="label">{store.L.tabs[tab.id]}</span>
           </button>
         )}
       </For>
