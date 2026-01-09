@@ -24,7 +24,6 @@ export const MockAPI = {
 
     return {
       ...DEFAULT_CONFIG,
-      moduledir: "/data/adb/modules",
       mountsource: "KSU",
       verbose: true,
       umount: true,
@@ -37,7 +36,7 @@ export const MockAPI = {
     console.log("[MockAPI] saveConfig:", config);
   },
 
-  scanModules: async (_moduleDir: string): Promise<MagicModule[]> => {
+  scanModules: async (): Promise<MagicModule[]> => {
     await delay(MOCK_DELAY);
     console.log("[MockAPI] scanModules");
 

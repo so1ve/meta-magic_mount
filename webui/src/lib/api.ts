@@ -8,7 +8,6 @@ import { MockAPI } from "./api.mock";
 import { DEFAULT_CONFIG, PATHS } from "./constants";
 
 export interface MagicConfig {
-  moduledir: string;
   tempdir?: string;
   mountsource: string;
   verbose: boolean;
@@ -124,10 +123,6 @@ function parseKvConfig(text: string): MagicConfig {
       value = stripQuotes(value);
 
       switch (key) {
-        case "moduledir": {
-          result.moduledir = value;
-          break;
-        }
         case "tempdir": {
           result.tempdir = value;
           break;
@@ -159,7 +154,6 @@ function serializeKvConfig(cfg: MagicConfig): string {
   const q = (s: string) => `"${s}"`;
   const lines = ["# Magic Mount Configuration File", ""];
 
-  lines.push(`moduledir = ${q(cfg.moduledir)}`);
   if (cfg.tempdir) {
     lines.push(`tempdir = ${q(cfg.tempdir)}`);
   }
@@ -220,7 +214,7 @@ EOF_CONFIG
     }
   },
 
-  scanModules: async (_moduleDir: string): Promise<MagicModule[]> => {
+  scanModules: async (): Promise<MagicModule[]> => {
     const cmd = "/data/adb/modules/magic_mount_rs/meta-mm scan --json";
     try {
       const { errno, stdout, stderr } = await ksuExec!(cmd);

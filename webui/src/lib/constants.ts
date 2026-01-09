@@ -5,7 +5,6 @@
  */
 
 export const DEFAULT_CONFIG = {
-  moduledir: "/data/adb/modules",
   tempdir: "",
   mountsource: "KSU",
   verbose: false,
