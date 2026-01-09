@@ -11,7 +11,6 @@ export interface MagicConfig {
   tempdir?: string;
   mountsource: string;
   umount: boolean;
-  disable_umount?: boolean;
   partitions: string[];
   [key: string]: any;
 }
@@ -153,7 +152,7 @@ function serializeKvConfig(cfg: MagicConfig): string {
     lines.push(`tempdir = ${q(cfg.tempdir)}`);
   }
   lines.push(`mountsource = ${q(cfg.mountsource)}`);
-  lines.push(`umount = ${!cfg.disable_umount}`);
+  lines.push(`umount = ${cfg.umount}`);
   const parts = cfg.partitions.map((p) => q(p)).join(", ");
   lines.push(`partitions = [${parts}]`);
 
@@ -179,18 +178,13 @@ const RealAPI = {
         `[ -f "${PATHS.CONFIG}" ] && cat "${PATHS.CONFIG}" || echo ""`,
       );
       if (errno === 0 && stdout.trim()) {
-        const raw = parseKvConfig(stdout);
-
-        return {
-          ...raw,
-          disable_umount: !raw.umount,
-        };
+        return parseKvConfig(stdout);
       }
     } catch (e) {
       console.error("Config load error:", e);
     }
 
-    return { ...DEFAULT_CONFIG, disable_umount: !DEFAULT_CONFIG.umount };
+    return DEFAULT_CONFIG;
   },
 
   saveConfig: async (config: MagicConfig): Promise<void> => {

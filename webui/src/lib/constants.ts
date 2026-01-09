@@ -8,7 +8,6 @@ export const DEFAULT_CONFIG = {
   tempdir: "",
   mountsource: "KSU",
   umount: true,
-  disable_umount: false,
   partitions: [],
 };
 export const PATHS = {

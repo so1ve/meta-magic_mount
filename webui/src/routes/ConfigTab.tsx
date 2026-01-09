@@ -138,8 +138,8 @@ export default function ConfigTab() {
         <section class="config-group">
           <div class="options-grid">
             <button
-              class={`option-tile clickable tertiary ${store.config.disable_umount ? "active" : ""}`}
-              onClick={() => toggle("disable_umount")}
+              class={`option-tile clickable tertiary ${store.config.umount ? "active" : ""}`}
+              onClick={() => toggle("umount")}
             >
               <md-ripple />
               <div class="tile-top">
