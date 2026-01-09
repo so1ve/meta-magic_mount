@@ -5,7 +5,7 @@
  */
 
 export const DEFAULT_CONFIG = {
-  tempdir: "",
+  tmpfsdir: "",
   mountsource: "KSU",
   umount: true,
   partitions: [],

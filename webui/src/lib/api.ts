@@ -79,8 +79,8 @@ function parseKvConfig(text: string): MagicConfig {
       value = stripQuotes(value);
 
       switch (key) {
-        case "tempdir": {
-          result.tempdir = value;
+        case "tmpfsdir": {
+          result.tmpfsdir = value;
           break;
         }
         case "mountsource": {
@@ -106,8 +106,8 @@ function serializeKvConfig(cfg: MagicConfig): string {
   const q = (s: string) => `"${s}"`;
   const lines = ["# Magic Mount Configuration File", ""];
 
-  if (cfg.tempdir) {
-    lines.push(`tempdir = ${q(cfg.tempdir)}`);
+  if (cfg.tmpfsdir) {
+    lines.push(`tmpfsdir = ${q(cfg.tmpfsdir)}`);
   }
   lines.push(`mountsource = ${q(cfg.mountsource)}`);
   lines.push(`umount = ${cfg.umount}`);

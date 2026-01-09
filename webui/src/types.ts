@@ -1,5 +1,5 @@
 export interface MagicConfig {
-  tempdir?: string;
+  tmpfsdir?: string;
   mountsource: string;
   umount: boolean;
   partitions: string[];
